@@ -59,6 +59,7 @@ const RESTOCK_SEEDS = [
     { name: "Venus Fly Trap", slug: "venus-fly-trap", rarity: "Mythic" },
     { name: "Pomegranate", slug: "pomegranate", rarity: "Mythic" },
     { name: "Poison Apple", slug: "poison-apple", rarity: "Mythic" },
+    { name: "Venom Spitter", slug: "venom-spitter", rarity: "Mythic" },
     { name: "Moon Bloom", slug: "moon-bloom", rarity: "Super" },
     { name: "Dragon's Breath", slug: "dragons-breath", rarity: "Super" }
 ];
