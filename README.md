@@ -12,7 +12,7 @@ A premium, modern, and fully responsive dashboard for predicting seed and gear s
 
 - **Live Seed & Gear Shop Predictors**: Displays accurate predictions for upcoming restocks with active countdown indicators for each item.
 - **Dynamic CSS Day/Night Sky**: A simulated horizon backdrop matching the exact 600-second in-game server cycle (Day, Sunset, Night) with drifting clouds, twinkling stars, and automatic dark/light theme switching.
-- **Rarest Pets Index**: A fully integrated index of the rarest pets (Rainbow, Big, Mega) ranked out of ~30 million gardeners with live filtering.
+- **Rarest Pets Index**: A fully integrated index of the rarest pets (Rainbow, Big, Mega) ranked out of ~50 million gardeners with live filtering.
 - **Advanced Sorting Options**: Dynamically sort seeds and gears by default indexing, active in-stock availability, price bounds, or rarity levels.
 - **Seed Restock History Modal**: Real-time modal tracking elapsed time since rare seeds last appeared in-game, predicted automatically from the server anchor loops.
 
