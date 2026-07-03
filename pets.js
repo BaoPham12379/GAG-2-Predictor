@@ -214,7 +214,7 @@ window.render = function () {
         if (leaf) leaf.style.display = 'none';
         if (gi) {
             gi.style.display = '';
-            gi.src = 'assets/images/crate/LadderCrate.webp';
+            gi.src = 'assets/images/Crate/LadderCrate.webp';
         }
     }
 };

@@ -22,23 +22,23 @@
     // Inject crate image URLs into ICON_URLS (from script.js) without touching script.js
     // Uses Proxy so any unknown crate name falls back to the Ladder Crate image
     if (typeof ICON_URLS !== 'undefined') {
-        const CRATE_DEFAULT_IMG = 'assets/images/crate/LadderCrate.webp';
+        const CRATE_DEFAULT_IMG = 'assets/images/Crate/LadderCrate.webp';
         const CRATE_IMAGES = {
-            'Light Crate': 'assets/images/crate/LightCrate.webp',
-            'Arch Crate': 'assets/images/crate/ArchCrate.webp',
-            'Bench Crate': 'assets/images/crate/BenchCrate.webp',
-            'Bridge Crate': 'assets/images/crate/BridgeCrate.webp',
-            'Seesaw Crate': 'assets/images/crate/SeesawCrate.webp',
-            'Sign Crate': 'assets/images/crate/SignCrate.webp',
-            'Teleporter Pad Crate': 'assets/images/crate/TeleporterPadCrate.webp',
-            'Ladder Crate': 'assets/images/crate/LadderCrate.webp',
-            'Fence Crate': 'assets/images/crate/FenceCrate.webp',
-            'Owner Door Crate': 'assets/images/crate/OwnerDoorCrate.webp',
-            'Conveyor Crate': 'assets/images/crate/ConveyorCrate.webp',
-            'Spring Crate': 'assets/images/crate/SpringCrate.webp',
-            'Roleplay Crate': 'assets/images/crate/RoleplayCrate.webp',
-            'Bear Trap Crate': 'assets/images/crate/BearTrapCrate.webp',
-            'Picture Frame Crate': 'assets/images/crate/PictureFrameCrate.webp'
+            'Light Crate': 'assets/images/Crate/LightCrate.webp',
+            'Arch Crate': 'assets/images/Crate/ArchCrate.webp',
+            'Bench Crate': 'assets/images/Crate/BenchCrate.webp',
+            'Bridge Crate': 'assets/images/Crate/BridgeCrate.webp',
+            'Seesaw Crate': 'assets/images/Crate/SeesawCrate.webp',
+            'Sign Crate': 'assets/images/Crate/SignCrate.webp',
+            'Teleporter Pad Crate': 'assets/images/Crate/TeleporterPadCrate.webp',
+            'Ladder Crate': 'assets/images/Crate/LadderCrate.webp',
+            'Fence Crate': 'assets/images/Crate/FenceCrate.webp',
+            'Owner Door Crate': 'assets/images/Crate/OwnerDoorCrate.webp',
+            'Conveyor Crate': 'assets/images/Crate/ConveyorCrate.webp',
+            'Spring Crate': 'assets/images/Crate/SpringCrate.webp',
+            'Roleplay Crate': 'assets/images/Crate/RoleplayCrate.webp',
+            'Bear Trap Crate': 'assets/images/Crate/BearTrapCrate.webp',
+            'Picture Frame Crate': 'assets/images/Crate/PictureFrameCrate.webp'
         };
         ICON_URLS.crates = new Proxy(CRATE_IMAGES, {
             get(target, prop) {
