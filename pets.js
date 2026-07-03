@@ -3,32 +3,37 @@
    ========================================================================== */
 
 const PETS_DATA = [
-    { rank: "✦", name: "Mega Rainbow Black Dragon", rarity: "Super", size: "Mega", rainbow: true, exist: null, odds: "???,???,???,???", image: "black-dragon-huge" },
-    { rank: "1", name: "Mega Rainbow Unicorn", rarity: "Mythic", size: "Mega", rainbow: true, exist: 1, odds: "50,000,000", image: "unicorn-huge" },
+    { rank: "1", name: "Big Rainbow Raccoon", rarity: "Super", size: "Big", rainbow: true, exist: 1, odds: "50,000,000", image: "raccoon-big" },
     { rank: "2", name: "Mega Rainbow Bee", rarity: "Legendary", size: "Mega", rainbow: true, exist: 1, odds: "50,000,000", image: "bee-huge" },
     { rank: "3", name: "Mega Rainbow Robin", rarity: "Legendary", size: "Mega", rainbow: true, exist: 1, odds: "50,000,000", image: "robin-huge" },
-    { rank: "4", name: "Rainbow Bear", rarity: "Mythic", size: "Normal", rainbow: true, exist: 2, odds: "25,000,000", image: "bear" },
-    { rank: "5", name: "Mega Raccoon", rarity: "Super", size: "Mega", rainbow: false, exist: 3, odds: "17,000,000", image: "raccoon-huge" },
-    { rank: "6", name: "Mega Bear", rarity: "Mythic", size: "Mega", rainbow: false, exist: 4, odds: "13,000,000", image: "bear-huge" },
-    { rank: "7", name: "Big Rainbow Turtle", rarity: "Rare", size: "Big", rainbow: true, exist: 4, odds: "13,000,000", image: "turtle-big" },
-    { rank: "8", name: "Mega Rainbow Frog", rarity: "Common", size: "Mega", rainbow: true, exist: 7, odds: "7,100,000", image: "frog-huge" },
-    { rank: "9", name: "Mega Unicorn", rarity: "Mythic", size: "Mega", rainbow: false, exist: 9, odds: "5,600,000", image: "unicorn-huge" },
-    { rank: "10", name: "Big Rainbow Owl", rarity: "Uncommon", size: "Big", rainbow: true, exist: 9, odds: "5,600,000", image: "owl-big" },
-    { rank: "11", name: "Mega Rainbow Deer", rarity: "Rare", size: "Mega", rainbow: true, exist: 11, odds: "4,500,000", image: "deer-huge" },
-    { rank: "12", name: "Mega Rainbow Bunny", rarity: "Common", size: "Mega", rainbow: true, exist: 11, odds: "4,500,000", image: "bunny-huge" },
-    { rank: "13", name: "Rainbow Monkey", rarity: "Mythic", size: "Normal", rainbow: true, exist: 13, odds: "3,800,000", image: "monkey" },
-    { rank: "14", name: "Mega Turtle", rarity: "Rare", size: "Mega", rainbow: false, exist: 19, odds: "2,600,000", image: "turtle-huge" },
-    { rank: "15", name: "Big Rainbow Robin", rarity: "Legendary", size: "Big", rainbow: true, exist: 23, odds: "2,200,000", image: "robin-big" },
-    { rank: "16", name: "Big Rainbow Bee", rarity: "Legendary", size: "Big", rainbow: true, exist: 28, odds: "1,800,000", image: "bee-big" },
-    { rank: "17", name: "Rainbow Raccoon", rarity: "Super", size: "Normal", rainbow: true, exist: 33, odds: "1,500,000", image: "raccoon" },
-    { rank: "18", name: "Rainbow Unicorn", rarity: "Mythic", size: "Normal", rainbow: true, exist: 39, odds: "1,300,000", image: "unicorn" },
-    { rank: "19", name: "Big Monkey", rarity: "Mythic", size: "Big", rainbow: false, exist: 42, odds: "1,200,000", image: "monkey-big" },
-    { rank: "20", name: "Big Raccoon", rarity: "Super", size: "Big", rainbow: false, exist: 53, odds: "940,000", image: "raccoon-big" },
-    { rank: "21", name: "Big Bear", rarity: "Mythic", size: "Big", rainbow: false, exist: 69, odds: "720,000", image: "bear-big" },
-    { rank: "22", name: "Rainbow Golden Dragonfly", rarity: "Mythic", size: "Normal", rainbow: true, exist: 73, odds: "680,000", image: "golden-dragonfly" },
-    { rank: "23", name: "Mega Ice Serpent", rarity: "Super", size: "Mega", rainbow: false, exist: 75, odds: "670,000", image: "ice-serpent-huge" },
-    { rank: "24", name: "Mega Rainbow Ice Serpent", rarity: "Super", size: "Mega", rainbow: true, exist: 76, odds: "660,000", image: "ice-serpent-huge" },
-    { rank: "25", name: "Big Rainbow Ice Serpent", rarity: "Super", size: "Big", rainbow: true, exist: 106, odds: "470,000", image: "ice-serpent-big" }
+    { rank: "4", name: "Mega Rainbow Turtle", rarity: "Rare", size: "Mega", rainbow: true, exist: 1, odds: "50,000,000", image: "turtle-huge" },
+    { rank: "5", name: "Mega Rainbow Unicorn", rarity: "Mythic", size: "Mega", rainbow: true, exist: 2, odds: "25,000,000", image: "unicorn-huge" },
+    { rank: "6", name: "Mega Raccoon", rarity: "Super", size: "Mega", rainbow: false, exist: 3, odds: "17,000,000", image: "raccoon-huge" },
+    { rank: "7", name: "Mega Golden Dragonfly", rarity: "Mythic", size: "Mega", rainbow: false, exist: 3, odds: "17,000,000", image: "golden-dragonfly-huge" },
+    { rank: "8", name: "Mega Bear", rarity: "Mythic", size: "Mega", rainbow: false, exist: 8, odds: "6,300,000", image: "bear-huge" },
+    { rank: "9", name: "Mega Rainbow Frog", rarity: "Common", size: "Mega", rainbow: true, exist: 8, odds: "6,300,000", image: "frog-huge" },
+    { rank: "10", name: "Mega Unicorn", rarity: "Mythic", size: "Mega", rainbow: false, exist: 10, odds: "5,000,000", image: "unicorn-huge" },
+    { rank: "11", name: "Rainbow Bear", rarity: "Mythic", size: "Normal", rainbow: true, exist: 12, odds: "4,200,000", image: "bear" },
+    { rank: "12", name: "Mega Rainbow Deer", rarity: "Rare", size: "Mega", rainbow: true, exist: 12, odds: "4,200,000", image: "deer-huge" },
+    { rank: "13", name: "Mega Rainbow Bunny", rarity: "Common", size: "Mega", rainbow: true, exist: 16, odds: "3,100,000", image: "bunny-huge" },
+    { rank: "14", name: "Big Rainbow Robin", rarity: "Legendary", size: "Big", rainbow: true, exist: 32, odds: "1,600,000", image: "robin-big" },
+    { rank: "15", name: "Rainbow Monkey", rarity: "Mythic", size: "Normal", rainbow: true, exist: 40, odds: "1,300,000", image: "monkey" },
+    { rank: "16", name: "Big Rainbow Bee", rarity: "Legendary", size: "Big", rainbow: true, exist: 43, odds: "1,200,000", image: "bee-big" },
+    { rank: "17", name: "Rainbow Raccoon", rarity: "Super", size: "Normal", rainbow: true, exist: 44, odds: "1,100,000", image: "raccoon" },
+    { rank: "18", name: "Mega Black Dragon", rarity: "Super", size: "Mega", rainbow: false, exist: 56, odds: "890,000", image: "black-dragon-huge" },
+    { rank: "19", name: "Big Rainbow Black Dragon", rarity: "Super", size: "Big", rainbow: true, exist: 58, odds: "860,000", image: "black-dragon-big" },
+    { rank: "20", name: "Mega Rainbow Black Dragon", rarity: "Super", size: "Mega", rainbow: true, exist: 59, odds: "850,000", image: "black-dragon-huge" },
+    { rank: "21", name: "Big Rainbow Turtle", rarity: "Rare", size: "Big", rainbow: true, exist: 61, odds: "820,000", image: "turtle-big" },
+    { rank: "22", name: "Rainbow Unicorn", rarity: "Mythic", size: "Normal", rainbow: true, exist: 71, odds: "700,000", image: "unicorn" },
+    { rank: "23", name: "Mega Rainbow Ice Serpent", rarity: "Super", size: "Mega", rainbow: true, exist: 72, odds: "690,000", image: "ice-serpent-huge" },
+    { rank: "24", name: "Big Raccoon", rarity: "Super", size: "Big", rainbow: false, exist: 75, odds: "670,000", image: "raccoon-big" },
+    { rank: "25", name: "Mega Ice Serpent", rarity: "Super", size: "Mega", rainbow: false, exist: 77, odds: "650,000", image: "ice-serpent-huge" },
+    { rank: "26", name: "Big Rainbow Owl", rarity: "Uncommon", size: "Big", rainbow: true, exist: 92, odds: "540,000", image: "owl-big" },
+    { rank: "27", name: "Rainbow Golden Dragonfly", rarity: "Mythic", size: "Normal", rainbow: true, exist: 107, odds: "470,000", image: "golden-dragonfly" },
+    { rank: "28", name: "Big Rainbow Ice Serpent", rarity: "Super", size: "Big", rainbow: true, exist: 109, odds: "460,000", image: "ice-serpent-big" },
+    { rank: "29", name: "Big Bear", rarity: "Mythic", size: "Big", rainbow: false, exist: 115, odds: "430,000", image: "bear-big" },
+    { rank: "30", name: "Big Monkey", rarity: "Mythic", size: "Big", rainbow: false, exist: 122, odds: "410,000", image: "monkey-big" },
+    { rank: "31", name: "Big Rainbow Deer", rarity: "Rare", size: "Big", rainbow: true, exist: 210, odds: "240,000", image: "deer-big" }
 ];
 
 let currentPetFilter = 'all';
@@ -163,7 +168,7 @@ window.render = function () {
         if (shopTitle) shopTitle.textContent = 'Rarest Pets';
 
         const headLabel = document.getElementById('headLabel');
-        if (headLabel) headLabel.textContent = 'Data updated as of June 29, 2026';
+        if (headLabel) headLabel.textContent = 'Data updated as of July 3, 2026';
 
         if (countdownVal) {
             countdownVal.textContent = 'Updated';

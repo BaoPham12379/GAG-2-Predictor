@@ -10,14 +10,16 @@ if (!window.TAB) {
 // Dynamically extract DATA from script.js since let variables are not exposed on window
 if (!window.DATA) {
     window.DATA = null;
-    fetch('script.js')
+    fetch('script.js?v=2')
         .then(response => response.text())
         .then(code => {
-            const startIdx = code.indexOf('let DATA = ');
-            if (startIdx !== -1) {
+            const match = /let DATA\s*=\s*/.exec(code);
+            if (match) {
+                const startIdx = match.index;
+                const matchLen = match[0].length;
                 const endIdx = code.indexOf(';', startIdx);
                 if (endIdx !== -1) {
-                    const jsonStr = code.substring(startIdx + 11, endIdx);
+                    const jsonStr = code.substring(startIdx + matchLen, endIdx);
                     window.DATA = JSON.parse(jsonStr);
                     // Dynamically correct the price of Super Sprinkler to 3,000,000 (3M)
                     if (window.DATA && window.DATA.gears) {
