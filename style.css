@@ -631,6 +631,12 @@ html[data-ui=dark] .info-link-btn:hover {
     border-color: var(--color-weather-border);
     box-shadow: inset 0 0 12px var(--color-weather-glow);
 }
+#tabCrates.active {
+    background: var(--color-crates-glow);
+    color: var(--color-crates);
+    border-color: var(--color-crates-border);
+    box-shadow: inset 0 0 12px var(--color-crates-glow);
+}
 #tabPets.active {
     background: var(--color-seeds-glow);
     color: var(--color-seeds);
