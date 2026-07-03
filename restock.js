@@ -237,6 +237,11 @@ window.render = function() {
         if (triggerBtn) triggerBtn.classList.add('hidden');
         if (sortContainer) sortContainer.classList.remove('hidden');
         closeRestockModal();
+    } else if (window.TAB === 'crates') {
+        if (footerControls) footerControls.classList.remove('hidden');
+        if (triggerBtn) triggerBtn.classList.add('hidden');
+        if (sortContainer) sortContainer.classList.remove('hidden');
+        closeRestockModal();
     } else {
         if (footerControls) footerControls.classList.add('hidden');
         if (triggerBtn) triggerBtn.classList.add('hidden');

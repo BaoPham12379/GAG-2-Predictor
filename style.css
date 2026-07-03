@@ -30,6 +30,10 @@
     --color-pets-glow: rgba(220, 38, 38, 0.08);
     --color-pets-border: rgba(220, 38, 38, 0.25);
     
+    --color-crates: #d97706;       /* amber-600 */
+    --color-crates-glow: rgba(217, 119, 6, 0.08);
+    --color-crates-border: rgba(217, 119, 6, 0.25);
+    
     --tab-bg: rgba(0, 0, 0, 0.04);
     --tab-btn-hover: #0f172a;
     
@@ -73,6 +77,10 @@ html[data-ui=dark] {
     --color-pets: #ff4d4d;       /* light red */
     --color-pets-glow: rgba(255, 77, 77, 0.15);
     --color-pets-border: rgba(255, 77, 77, 0.3);
+    
+    --color-crates: #f59e0b;       /* amber-500 */
+    --color-crates-glow: rgba(245, 158, 11, 0.15);
+    --color-crates-border: rgba(245, 158, 11, 0.3);
     
     --tab-bg: rgba(0, 0, 0, 0.25);
     --tab-btn-hover: #ffffff;
@@ -668,6 +676,11 @@ html[data-ui=dark] .status-panel {
     --active-color: var(--color-pets);
     --active-glow-color: var(--color-pets-glow);
     border-color: var(--color-pets-border);
+}
+.status-panel.crates {
+    --active-color: var(--color-crates);
+    --active-glow-color: var(--color-crates-glow);
+    border-color: var(--color-crates-border);
 }
 
 /* Phase Badge for Weather tab */

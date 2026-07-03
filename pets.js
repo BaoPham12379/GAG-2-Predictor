@@ -132,11 +132,13 @@ window.setTab = function (tab) {
     // Toggle active state for standard tabs using original elements
     const tSeeds = document.getElementById('tabSeeds');
     const tGears = document.getElementById('tabGears');
+    const tCrates = document.getElementById('tabCrates');
     const tWeather = document.getElementById('tabWeather');
     const tPets = document.getElementById('tabPets');
 
     if (tSeeds) tSeeds.classList.toggle('active', tab === 'seeds');
     if (tGears) tGears.classList.toggle('active', tab === 'gears');
+    if (tCrates) tCrates.classList.toggle('active', tab === 'crates');
     if (tWeather) tWeather.classList.toggle('active', tab === 'weather');
     if (tPets) tPets.classList.toggle('active', tab === 'pets');
 
@@ -159,7 +161,7 @@ window.render = function () {
         if (shopHead) {
             shopHead.classList.remove('hidden');
             shopHead.style.display = '';
-            shopHead.classList.remove('gears', 'weather', 'pets');
+            shopHead.classList.remove('gears', 'weather', 'pets', 'crates');
             shopHead.classList.add('pets');
         }
 
@@ -202,6 +204,18 @@ window.render = function () {
 
     if (originalRender) {
         originalRender();
+    }
+
+    // After original render, override header icon for crates tab
+    // (script.js hides both icons for crates; we show the ladder crate image instead)
+    if (window.TAB === 'crates') {
+        const leaf = document.getElementById('leafIcon');
+        const gi = document.getElementById('gearIcon');
+        if (leaf) leaf.style.display = 'none';
+        if (gi) {
+            gi.style.display = '';
+            gi.src = 'assets/images/crate/LadderCrate.webp';
+        }
     }
 };
 

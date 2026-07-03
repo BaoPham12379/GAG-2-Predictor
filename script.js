@@ -23,7 +23,7 @@ function shortDur(s) {
     const d = Math.floor(s / 86400), h = Math.round((s % 86400) / 3600); return h ? d + 'd ' + h + 'h' : d + 'd';
 }
 
-function anchorFor() { return (TAB === 'gears' ? DATA.gearAnchor : DATA.seedAnchor) || 0; }
+function anchorFor() { return (TAB === 'gears' ? DATA.gearAnchor : (TAB === 'crates' ? DATA.crateAnchor : DATA.seedAnchor)) || 0; }
 function evalItem(item) {
     const anchor = anchorFor();
     const count = DATA.count || (item.q ? item.q.length : 0);
@@ -52,7 +52,13 @@ function buildRow(item) {
         <div class="top">
             <div class="iconbox">
                 ${SUN ? `<img class="sun" src="${SUN}" alt="" loading="lazy">` : ''}
-                ${url ? `<img class="ico" src="${url}" alt="${item.name}" loading="lazy">` : ''}
+                ${url ? `<img class="ico" src="${url}" alt="${item.name}" loading="lazy">` : (TAB === 'crates' ? `
+                    <svg class="ico crate-svg" viewBox="0 0 24 24" fill="none" stroke="var(--active-color, #10b981)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; opacity: 0.85;">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                ` : '')}
             </div>
             <div class="mid">
                 <div class="titan name out">${nameFor(item)}</div>
@@ -121,11 +127,13 @@ function applyHeader() {
     const head = document.getElementById('shopHead');
     head.classList.toggle('gears', TAB === 'gears');
     head.classList.toggle('weather', TAB === 'weather');
-    document.getElementById('shopTitle').textContent = TAB === 'gears' ? 'Gear Shop' : (TAB === 'weather' ? 'Weather' : 'Seed Shop');
+    head.classList.toggle('crates', TAB === 'crates');
+    document.getElementById('shopTitle').textContent = TAB === 'gears' ? 'Gear Shop' : (TAB === 'crates' ? 'Crate Shop' : (TAB === 'weather' ? 'Weather' : 'Seed Shop'));
     document.getElementById('headLabel').textContent = TAB === 'weather' ? 'Next phase in' : 'Restock in';
     const leaf = document.getElementById('leafIcon'), gi = document.getElementById('gearIcon');
     if (TAB === 'seeds') { leaf.style.display = ''; gi.style.display = 'none'; }
     else if (TAB === 'gears') { leaf.style.display = 'none'; gi.style.display = ''; if (GEARHEAD) gi.src = GEARHEAD; }
+    else if (TAB === 'crates') { leaf.style.display = 'none'; gi.style.display = 'none'; }
     else { leaf.style.display = 'none'; const d = DATA.weather ? weatherRowsData()[0] : null; const u = d ? weatherIco(d.name) : ''; if (u) { gi.style.display = ''; gi.src = u; } else gi.style.display = 'none'; }
     const note = document.getElementById('weatherNote'); if (note) note.classList.toggle('hidden', TAB !== 'weather');
 }
@@ -144,7 +152,7 @@ function render() {
 function tickGlobal() {
     if (!DATA) return;
     if (TAB === 'weather') { const cur = weatherAt(now()); document.getElementById('globalCountdown').textContent = cur ? clock(cur.secsLeft) : '--:--'; return; }
-    const anchor = (TAB === 'gears' && DATA.gearAnchor) ? DATA.gearAnchor : DATA.seedAnchor;
+    const anchor = (TAB === 'gears' && DATA.gearAnchor) ? DATA.gearAnchor : (TAB === 'crates' && DATA.crateAnchor ? DATA.crateAnchor : DATA.seedAnchor);
     const t = now();
     const next = (t < anchor) ? anchor : anchor + PERIOD * Math.ceil((t - anchor) / PERIOD);
     document.getElementById('globalCountdown').textContent = headDur(next - t);
@@ -174,11 +182,13 @@ function setTab(tab) {
     TAB = tab;
     document.getElementById('tabSeeds').classList.toggle('active', tab === 'seeds');
     document.getElementById('tabGears').classList.toggle('active', tab === 'gears');
+    document.getElementById('tabCrates').classList.toggle('active', tab === 'crates');
     document.getElementById('tabWeather').classList.toggle('active', tab === 'weather');
     lastWKey = ''; render(); tickGlobal();
 }
 document.getElementById('tabSeeds').onclick = () => setTab('seeds');
 document.getElementById('tabGears').onclick = () => setTab('gears');
+document.getElementById('tabCrates').onclick = () => setTab('crates');
 document.getElementById('tabWeather').onclick = () => setTab('weather');
 
 if (DATA) {

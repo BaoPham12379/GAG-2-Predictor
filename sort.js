@@ -19,16 +19,47 @@
         Prismatic: 9 
     };
 
+    // Inject crate image URLs into ICON_URLS (from script.js) without touching script.js
+    // Uses Proxy so any unknown crate name falls back to the Ladder Crate image
+    if (typeof ICON_URLS !== 'undefined') {
+        const CRATE_DEFAULT_IMG = 'assets/images/crate/LadderCrate.webp';
+        const CRATE_IMAGES = {
+            'Light Crate': 'assets/images/crate/LightCrate.webp',
+            'Arch Crate': 'assets/images/crate/ArchCrate.webp',
+            'Bench Crate': 'assets/images/crate/BenchCrate.webp',
+            'Bridge Crate': 'assets/images/crate/BridgeCrate.webp',
+            'Seesaw Crate': 'assets/images/crate/SeesawCrate.webp',
+            'Sign Crate': 'assets/images/crate/SignCrate.webp',
+            'Teleporter Pad Crate': 'assets/images/crate/TeleporterPadCrate.webp',
+            'Ladder Crate': 'assets/images/crate/LadderCrate.webp',
+            'Fence Crate': 'assets/images/crate/FenceCrate.webp',
+            'Owner Door Crate': 'assets/images/crate/OwnerDoorCrate.webp',
+            'Conveyor Crate': 'assets/images/crate/ConveyorCrate.webp',
+            'Spring Crate': 'assets/images/crate/SpringCrate.webp',
+            'Roleplay Crate': 'assets/images/crate/RoleplayCrate.webp',
+            'Bear Trap Crate': 'assets/images/crate/BearTrapCrate.webp',
+            'Picture Frame Crate': 'assets/images/crate/PictureFrameCrate.webp'
+        };
+        ICON_URLS.crates = new Proxy(CRATE_IMAGES, {
+            get(target, prop) {
+                if (typeof prop === 'string') return target[prop] || CRATE_DEFAULT_IMG;
+                return target[prop];
+            }
+        });
+    }
+
     // Shared custom view arrays
     window.mySortedView = [];
     window.myLastWindow = 0;
 
     // Helper to highlight active stock cards
     function highlightActiveStock() {
+        const useSorted = (window.TAB === 'seeds' || window.TAB === 'gears' || window.TAB === 'crates');
+        const items = useSorted ? window.mySortedView : (typeof VIEW !== 'undefined' ? VIEW : []);
         const rowsElements = document.querySelectorAll('#rows .row');
-        if (rowsElements.length > 0 && window.mySortedView && window.evalItem) {
+        if (rowsElements.length > 0 && items && items.length > 0 && window.evalItem) {
             rowsElements.forEach((row, idx) => {
-                const item = window.mySortedView[idx];
+                const item = items[idx];
                 if (item) {
                     const ev = window.evalItem(item);
                     const inStock = ev && ev.cur && ev.cur.q > 0;
@@ -50,8 +81,8 @@
             originalSortRender();
         }
 
-        // Only apply custom sorting for Seeds and Gears tabs
-        if (window.TAB !== 'seeds' && window.TAB !== 'gears') {
+        // Only apply custom sorting for Seeds, Gears, and Crates tabs
+        if (window.TAB !== 'seeds' && window.TAB !== 'gears' && window.TAB !== 'crates') {
             return;
         }
 
@@ -145,11 +176,16 @@
             return;
         }
 
-        // Tick countdowns for current sorted view
+        // Determine which item list to use for countdown ticking
+        // Seeds/Gears use the custom sorted view; Crates and others use the global VIEW array
+        const useSorted = (window.TAB === 'seeds' || window.TAB === 'gears' || window.TAB === 'crates');
+        const items = useSorted ? window.mySortedView : (typeof VIEW !== 'undefined' ? VIEW : []);
+
+        // Tick countdowns for current active view
         const rowEls = document.querySelectorAll('#rows .row');
-        if (rowEls.length > 0 && window.mySortedView && window.evalItem && window.shortDur) {
+        if (rowEls.length > 0 && items && items.length > 0 && window.evalItem && window.shortDur) {
             rowEls.forEach((el, i) => {
-                const item = window.mySortedView[i];
+                const item = items[i];
                 if (!item) return;
                 const ev = window.evalItem(item);
                 const cd = el.querySelector('.cd');
