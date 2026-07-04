@@ -3,6 +3,11 @@
    ========================================================================== */
 
 (function() {
+    // Expose script.js DATA variable to window to prevent restock.js from making a duplicate fetch request
+    if (typeof DATA !== 'undefined' && !window.DATA) {
+        window.DATA = DATA;
+    }
+
     // --------------------------------------------------------------------------
     // LOCAL TIME TOGGLE FEATURE (DECOUPLED HOOKS)
     // --------------------------------------------------------------------------
