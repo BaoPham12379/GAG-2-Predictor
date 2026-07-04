@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gag-2-predictor.vercel.app/sitemap.xml
