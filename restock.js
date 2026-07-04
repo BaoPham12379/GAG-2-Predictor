@@ -131,8 +131,12 @@ function renderRestockHistory() {
             
             if (lastIdx !== -1) {
                 const lastStockedTime = anchor + lastIdx * period;
-                const elapsed = nowTimestamp - lastStockedTime;
-                statusText = `${formatElapsed(elapsed)} ago`;
+                if (window.useLocalTime) {
+                    statusText = window.formatLocalTime(lastStockedTime);
+                } else {
+                    const elapsed = nowTimestamp - lastStockedTime;
+                    statusText = `${formatElapsed(elapsed)} ago`;
+                }
             } else {
                 statusText = 'Not seen recently';
             }
@@ -226,21 +230,25 @@ window.render = function() {
     const triggerBtn = document.getElementById('restockTriggerBtn');
     const sortContainer = document.getElementById('sortControlsContainer');
     const footerControls = document.getElementById('consoleFooterControls');
+    const sortSelectWrapper = document.getElementById('sortSelectWrapper');
     
     if (window.TAB === 'seeds') {
         if (footerControls) footerControls.classList.remove('hidden');
         if (triggerBtn) triggerBtn.classList.remove('hidden');
         if (sortContainer) sortContainer.classList.remove('hidden');
+        if (sortSelectWrapper) sortSelectWrapper.classList.remove('hidden');
         tickRestockCountdown();
-    } else if (window.TAB === 'gears') {
+    } else if (window.TAB === 'gears' || window.TAB === 'crates') {
         if (footerControls) footerControls.classList.remove('hidden');
         if (triggerBtn) triggerBtn.classList.add('hidden');
         if (sortContainer) sortContainer.classList.remove('hidden');
+        if (sortSelectWrapper) sortSelectWrapper.classList.remove('hidden');
         closeRestockModal();
-    } else if (window.TAB === 'crates') {
+    } else if (window.TAB === 'weather') {
         if (footerControls) footerControls.classList.remove('hidden');
         if (triggerBtn) triggerBtn.classList.add('hidden');
         if (sortContainer) sortContainer.classList.remove('hidden');
+        if (sortSelectWrapper) sortSelectWrapper.classList.add('hidden');
         closeRestockModal();
     } else {
         if (footerControls) footerControls.classList.add('hidden');

@@ -3,6 +3,139 @@
    ========================================================================== */
 
 (function() {
+    // --------------------------------------------------------------------------
+    // LOCAL TIME TOGGLE FEATURE (DECOUPLED HOOKS)
+    // --------------------------------------------------------------------------
+    window.useLocalTime = localStorage.getItem('gag_useLocalTime') === 'true';
+
+    window.formatLocalTime = function(timestamp) {
+        const target = new Date(timestamp * 1000);
+        const now = new Date();
+        
+        const isToday = target.getDate() === now.getDate() &&
+                        target.getMonth() === now.getMonth() &&
+                        target.getFullYear() === now.getFullYear();
+                        
+        const tomorrow = new Date(now);
+        tomorrow.setDate(now.getDate() + 1);
+        const isTomorrow = target.getDate() === tomorrow.getDate() &&
+                           target.getMonth() === tomorrow.getMonth() &&
+                           target.getFullYear() === tomorrow.getFullYear();
+                           
+        const timeStr = target.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        if (isToday) {
+            return `Today ${timeStr}`;
+        } else if (isTomorrow) {
+            return `Tomorrow ${timeStr}`;
+        } else {
+            const dayStr = target.toLocaleDateString([], { weekday: 'short' });
+            return `${dayStr} ${timeStr}`;
+        }
+    };
+    
+    // Override window.buildRow to support local time format
+    const originalBuildRow = window.buildRow;
+    window.buildRow = function(item) {
+        if (!originalBuildRow) return document.createElement('div');
+        const el = originalBuildRow(item);
+        if (window.useLocalTime) {
+            const badge = el.querySelector('.next-badge');
+            if (badge && !badge.classList.contains('none')) {
+                const ev = window.evalItem(item);
+                if (ev && ev.nxt) {
+                    badge.innerHTML = `At <span class="cd">${window.formatLocalTime(ev.nxt.t)}</span> | x${ev.nxt.q}`;
+                }
+            }
+        }
+        return el;
+    };
+    
+    // Override window.weatherRowsData to support local time format
+    const originalWeatherRowsData = window.weatherRowsData;
+    window.weatherRowsData = function() {
+        if (!window.useLocalTime) {
+            return originalWeatherRowsData ? originalWeatherRowsData() : [];
+        }
+        const W = window.DATA.weather; if (!W || !W.clen) return [];
+        const t = Math.floor(Date.now() / 1000); const out = [];
+        const cur = window.weatherAt(t);
+        const WSKIP = { Day: true, Sunset: true, Moon: true };
+        
+        if (cur && cur.name && !WSKIP[cur.name]) {
+            const label = 'until ' + window.formatLocalTime(t + cur.secsLeft);
+            out.push({ name: cur.name, label: label, isCur: true });
+        }
+        for (const u of window.upcomingWeather(400)) {
+            if (WSKIP[u.name]) continue;
+            const label = 'at ' + window.formatLocalTime(t + u.secs);
+            out.push({ name: u.name, label: label, isCur: false });
+            if (out.length >= 12) break;
+        }
+        return out;
+    };
+    
+    // Override window.tickWeather
+    window.myLastWKey = '';
+    const originalTickWeather = window.tickWeather;
+    window.tickWeather = function() {
+        if (!window.useLocalTime) {
+            if (originalTickWeather) originalTickWeather();
+            return;
+        }
+        const cur = window.weatherAt(Math.floor(Date.now() / 1000)); if (!cur) return;
+        const key = cur.cyc + '-' + cur.pi;
+        if (key !== window.myLastWKey) {
+            window.myLastWKey = key;
+            if (window.renderWeather) window.renderWeather();
+            return;
+        }
+        const data = window.weatherRowsData();
+        document.querySelectorAll('#rows .row').forEach((el, i) => {
+            const b = el.querySelector('.next-badge'); if (b && data[i]) b.textContent = data[i].label;
+        });
+    };
+    
+    // Bind toggle DOM element events
+    function initToggle() {
+        const timeToggle = document.getElementById('timeToggleCheckbox');
+        if (timeToggle) {
+            timeToggle.checked = window.useLocalTime;
+            timeToggle.addEventListener('change', (e) => {
+                window.useLocalTime = e.target.checked;
+                localStorage.setItem('gag_useLocalTime', window.useLocalTime);
+                if (window.render) window.render();
+                if (window.renderRestockHistory) window.renderRestockHistory();
+            });
+            
+            // Support clicking on the icons directly
+            const iconCountdown = document.querySelector('.toggle-icon-countdown');
+            if (iconCountdown) {
+                iconCountdown.parentElement.addEventListener('click', () => {
+                    if (timeToggle.checked) {
+                        timeToggle.checked = false;
+                        timeToggle.dispatchEvent(new Event('change'));
+                    }
+                });
+            }
+            const iconLocal = document.querySelector('.toggle-icon-local');
+            if (iconLocal) {
+                iconLocal.parentElement.addEventListener('click', () => {
+                    if (!timeToggle.checked) {
+                        timeToggle.checked = true;
+                        timeToggle.dispatchEvent(new Event('change'));
+                    }
+                });
+            }
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initToggle);
+    } else {
+        initToggle();
+    }
+
     // Local helper to get current unix timestamp
     const getNow = () => Math.floor(Date.now() / 1000);
 
@@ -190,7 +323,11 @@
                 const ev = window.evalItem(item);
                 const cd = el.querySelector('.cd');
                 if (cd && ev.nxt) {
-                    cd.textContent = window.shortDur(ev.nxt.t - t);
+                    if (window.useLocalTime) {
+                        cd.textContent = window.formatLocalTime(ev.nxt.t);
+                    } else {
+                        cd.textContent = window.shortDur(ev.nxt.t - t);
+                    }
                 }
             });
         }

@@ -137,15 +137,34 @@
 
                 <!-- Sorting Controls -->
                 <div id="sortControlsContainer" class="sort-controls-container hidden">
-                    <label for="sortSelect" class="sort-label">Sort by:</label>
-                    <select id="sortSelect" class="sort-select">
-                        <option value="default">Default</option>
-                        <option value="instock">In-Stock First</option>
-                        <option value="rarity-asc">Rarity (Low to High)</option>
-                        <option value="rarity-desc">Rarity (High to Low)</option>
-                        <option value="price-asc">Price (Low to High)</option>
-                        <option value="price-desc">Price (High to Low)</option>
-                    </select>
+                    <div id="sortSelectWrapper" class="sort-select-wrapper">
+                        <label for="sortSelect" class="sort-label">Sort by:</label>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="default">Default</option>
+                            <option value="instock">In-Stock First</option>
+                            <option value="rarity-asc">Rarity (Low to High)</option>
+                            <option value="rarity-desc">Rarity (High to Low)</option>
+                            <option value="price-asc">Price (Low to High)</option>
+                            <option value="price-desc">Price (High to Low)</option>
+                        </select>
+                    </div>
+                    <div class="time-toggle-wrapper">
+                        <span class="time-toggle-text time-toggle-icon-wrap" title="Show relative countdowns">
+                            <svg class="toggle-icon toggle-icon-countdown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px; display: block;">
+                                <path d="M5 2h14M5 22h14M17 2v5c0 1.5-1 3-2.5 3.5L12 12l2.5 1.5c1.5.5 2.5 2 2.5 3.5v5M7 2v5c0 1.5 1 3 2.5 3.5L12 12 9.5 13.5C8 14 7 15.5 7 17v5"></path>
+                            </svg>
+                        </span>
+                        <label class="switch" aria-label="Toggle time format">
+                            <input type="checkbox" id="timeToggleCheckbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="time-toggle-text time-toggle-icon-wrap" title="Show exact local times">
+                            <svg class="toggle-icon toggle-icon-local" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px; display: block;">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 15 15"></polyline>
+                            </svg>
+                        </span>
+                    </div>
                 </div>
             </div>
         </section>
