@@ -169,6 +169,14 @@
                 <button class="tab-btn" id="tabPets" data-tab="pets">Rarest Pets</button>
             </div>
 
+            <!-- Danger Sliding Warning Banner -->
+            <div class="danger-ticker" id="dangerTicker">
+                <div class="danger-ticker__track">
+                    <span class="danger-ticker__text">⚠️ Warning: As of July 4, 2026, all predictors are now server-sided and predictions are patched. Any claims of 100% accuracy are fake! Stock data has been moved to the official GAG2 servers, accessible only to official developers.</span>
+                    <span class="danger-ticker__text">⚠️ Warning: As of July 4, 2026, all predictors are now server-sided and predictions are patched. Any claims of 100% accuracy are fake! Stock data has been moved to the official GAG2 servers, accessible only to official developers.</span>
+                </div>
+            </div>
+
 
 
             <!-- Global Status Bar -->
@@ -315,6 +323,41 @@
         <p>Grow a Garden 2 Stock Predictor</p>
     </footer>
 
+    <!-- Announcement Modal -->
+    <div class="srm hidden" id="announcementModal">
+        <div class="srm__backdrop" id="announcementModalCloseBackdrop"></div>
+        <div class="srm__panel" role="dialog" aria-modal="true" aria-label="Important Announcement">
+            <button class="srm__close" id="announcementModalCloseBtn" type="button" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+                    <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+            </button>
+            <header class="srm__head">
+                <h2 class="srm__title" style="color: #ef4444; display: flex; align-items: center; gap: 8px;">
+                    <span aria-hidden="true">⚠️</span> Important Announcement
+                </h2>
+                <p class="srm__sub" style="margin-top: 4px;">
+                    Please read this notice regarding Grow a Garden 2 predictions.
+                </p>
+            </header>
+            <div class="info-modal-list" style="margin-top: 8px;">
+                <div class="info-modal-item" style="flex-direction: column; gap: 8px; font-size: 0.92rem; line-height: 1.6;">
+                    <p><strong>As of July 4, 2026, all predictors have become server-sided.</strong> This means that stock data has been moved to the official Grow a Garden 2 servers, and predictions have been patched.</p>
+                    <p>This data is completely inaccessible and cannot be viewed by anyone except the official Grow a Garden 2 developers.</p>
+                    <p style="color: #ef4444; font-weight: 700;">Any claims that predictions are 100% accurate are fake.</p>
+                </div>
+            </div>
+            
+            <div class="announcement-footer">
+                <label class="announcement-checkbox-label">
+                    <input type="checkbox" id="announcementDismissCheck" class="announcement-checkbox">
+                    <span>Don't show this message again</span>
+                </label>
+                <button type="button" id="announcementAckBtn" class="announcement-btn">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Seed Restock Modal -->
     <div class="srm hidden" id="restockModal">
         <div class="srm__backdrop" id="restockModalCloseBackdrop"></div>
@@ -411,6 +454,7 @@
     <script src="sort.js?v=2"></script>
     <script src="restock.js?v=2"></script>
     <script src="sky-sync.js?v=2"></script>
+    <script src="announcement.js"></script>
 </body>
 
 </html>

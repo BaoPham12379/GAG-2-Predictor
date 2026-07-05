@@ -2000,3 +2000,184 @@ html[data-ui=dark] .sort-select option {
     background: #0c1220;
     color: #ffffff;
 }
+
+/* ==========================================================================
+   DANGER SLIDING TEXT TICKER
+   ========================================================================== */
+.danger-ticker {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: rgba(220, 38, 38, 0.09);
+    border: 1px solid rgba(220, 38, 38, 0.28);
+    border-radius: 12px;
+    padding: 0.6rem 0;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.05);
+    user-select: none;
+}
+
+/* Dark mode override for glowing alert */
+html[data-ui=dark] .danger-ticker {
+    background: rgba(239, 68, 68, 0.07);
+    border: 1px solid rgba(239, 68, 68, 0.24);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.08), inset 0 0 8px rgba(239, 68, 68, 0.04);
+}
+
+.danger-ticker__track {
+    display: inline-flex;
+    width: max-content;
+    animation: ticker-slide 32s linear infinite;
+}
+
+.danger-ticker:hover .danger-ticker__track {
+    animation-play-state: paused;
+}
+
+.danger-ticker__text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #ef4444;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding-right: 3rem;
+}
+
+html[data-ui=dark] .danger-ticker__text {
+    color: #ff5f5f;
+    text-shadow: 0 0 8px rgba(255, 95, 95, 0.25);
+}
+
+@keyframes ticker-slide {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+/* ==========================================================================
+   ANNOUNCEMENT MODAL CUSTOM CONTROLS
+   ========================================================================== */
+.announcement-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    user-select: none;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.announcement-checkbox-label:hover {
+    color: var(--text-primary);
+}
+
+.announcement-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.announcement-checkbox:checked {
+    background: #ef4444;
+    border-color: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.announcement-checkbox::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background-color: white;
+    transform: scale(0);
+    transition: transform 0.15s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 16%, 86% 2%, 38% 68%);
+}
+
+.announcement-checkbox:checked::before {
+    transform: scale(1);
+}
+
+/* Light mode adjustments */
+html[data-ui=light] .announcement-checkbox {
+    border-color: rgba(15, 23, 42, 0.25);
+    background: rgba(15, 23, 42, 0.04);
+}
+
+html[data-ui=light] .announcement-checkbox:checked {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.announcement-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.25rem;
+}
+
+html[data-ui=light] .announcement-footer {
+    border-top-color: rgba(15, 23, 42, 0.08);
+}
+
+.announcement-btn {
+    width: 100%;
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.announcement-btn:hover {
+    background: #ff5f5f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+}
+
+.announcement-btn:active {
+    transform: translateY(0);
+}
+
+html[data-ui=light] .announcement-btn {
+    background: #dc2626;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+html[data-ui=light] .announcement-btn:hover {
+    background: #b91c1c;
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.35);
+}
+
