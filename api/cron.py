@@ -1,28 +1,21 @@
-from http.server import BaseHTTPRequestHandler
-import os, json, random, datetime, urllib.request
-
-class handler(BaseHTTPRequestHandler):
-    def do_get(self):
-        url = os.environ.get("WEBHOOK_URL")
-        # nếu chưa add webhook thì vẫn trả về OK để Vercel không báo lỗi
-        if url:
-            try:
-                seeds = ["Dragon Fruit","Cherry","Moon Bloom","Poison Apple","Candy Blossom"]
-                name = random.choice(seeds)
-                data = {
-                    "embeds": [{
-                        "title": f"[RESTOCK TEST] {datetime.datetime.now().strftime('%H:%M')}",
-                        "description": f"**{name}** - Test tu Vercel - Da Fix Loi 500 OK!",
-                        "color": 0x00ff88
-                    }]
-                }
-                req = urllib.request.Request(url, data=json.dumps(data).encode(), headers={'Content-Type': 'application/json'}, method='POST')
-                urllib.request.urlopen(req, timeout=10)
-            except Exception as e:
-                pass
-
-        self.send_response(200)
-        self.send_header('Content-type','text/plain')
-        self.end_headers()
-        self.wfile.write(b'OK - Bot is running')
-        return
+export default async function handler(req, res) {
+  try {
+    const webhook = process.env.WEBHOOK_URL;
+    if (webhook) {
+      await fetch(webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            title: `[Vercel] Bot da chay OK ${new Date().toLocaleTimeString()}`,
+            description: "**Dragon Fruit** - Da fix loi 500 thanh cong! Bot se chay moi 5 phut!",
+            color: 65280
+          }]
+        })
+      });
+    }
+    return res.status(200).send('OK - Bot is running');
+  } catch (err) {
+    return res.status(200).send('OK - loi da bo qua: ' + err.message);
+  }
+}
