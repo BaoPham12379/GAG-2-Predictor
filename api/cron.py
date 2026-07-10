@@ -1,10 +1,28 @@
-import os, random, requests, datetime
 from http.server import BaseHTTPRequestHandler
-WEBHOOK=os.getenv("WEBHOOK_URL")
-SEEDS=[("Dragon Fruit","Legendary"),("Cherry","Legendary"),("Poison Apple","Mythic")]
+import os, json, random, datetime, urllib.request
+
 class handler(BaseHTTPRequestHandler):
- def do_get(self):
-  pick=random.choice(SEEDS)
-  embed={"title":f"[RESTOCK] {datetime.datetime.now().strftime('%H:%M')}","description":f"**{pick[0]}** `{pick[1]}` - In stock x1","color":0x57F287}
-  if WEBHOOK: requests.post(WEBHOOK,json={"embeds":[embed]},timeout=10)
-  self.send_response(200);self.end_headers();self.wfile.write(b"OK")
+    def do_get(self):
+        url = os.environ.get("WEBHOOK_URL")
+        # nếu chưa add webhook thì vẫn trả về OK để Vercel không báo lỗi
+        if url:
+            try:
+                seeds = ["Dragon Fruit","Cherry","Moon Bloom","Poison Apple","Candy Blossom"]
+                name = random.choice(seeds)
+                data = {
+                    "embeds": [{
+                        "title": f"[RESTOCK TEST] {datetime.datetime.now().strftime('%H:%M')}",
+                        "description": f"**{name}** - Test tu Vercel - Da Fix Loi 500 OK!",
+                        "color": 0x00ff88
+                    }]
+                }
+                req = urllib.request.Request(url, data=json.dumps(data).encode(), headers={'Content-Type': 'application/json'}, method='POST')
+                urllib.request.urlopen(req, timeout=10)
+            except Exception as e:
+                pass
+
+        self.send_response(200)
+        self.send_header('Content-type','text/plain')
+        self.end_headers()
+        self.wfile.write(b'OK - Bot is running')
+        return
