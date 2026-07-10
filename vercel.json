@@ -1,13 +1,19 @@
 {
   "headers": [
     {
-      "source": "/(.*)\\.(css|js|png|webp|ico|svg)",
+      "source": "/(.*)\\.(css|js|png|webp|ico|jpg|jpeg|svg|woff|woff2)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
         }
       ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
